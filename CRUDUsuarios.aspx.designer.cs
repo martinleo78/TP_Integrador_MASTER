@@ -24,6 +24,24 @@ namespace TP_Integrador_Master
         protected global::System.Web.UI.WebControls.Label label_bienvenida;
 
         /// <summary>
+        /// txt_buscar_usuario control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txt_buscar_usuario;
+
+        /// <summary>
+        /// txt_buscar_privilegio control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txt_buscar_privilegio;
+
+        /// <summary>
         /// tablaUsuarios control.
         /// </summary>
         /// <remarks>

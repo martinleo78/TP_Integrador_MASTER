@@ -24,7 +24,8 @@ namespace TP_Integrador_Master
                 string uid = TextBox1.Text;
                 string pass = TextBox2.Text;
                 con.Open();
-                string qry = "select * from Users where UserName='" + uid + "' and Salt='" + pass + "'";
+                string qry = "select * from Users where UserName='" + uid + "' and Salt='" + pass + "' "+
+                    "and is_deleted=0;";
                 SqlCommand cmd = new SqlCommand(qry, con);
                 SqlDataReader sdr = cmd.ExecuteReader();
                 if (sdr.Read())
@@ -32,7 +33,6 @@ namespace TP_Integrador_Master
                     Label4.Text = "Loggeado " + uid + "!";
                     Session["usuariologgeado"] = uid;
                     Response.Redirect("Principal.aspx");
-
                 }
                 else
                 {

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="CRUDPrivilegios.aspx.cs" Inherits="TP_Integrador_Master.CRUDPrivilegios" %>
+﻿<%@ Page Title="CRUD Privilegios" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="CRUDPrivilegios.aspx.cs" Inherits="TP_Integrador_Master.CRUDPrivilegios" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <div>
