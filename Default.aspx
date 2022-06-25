@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="TP_Integrador_Master._Default" %>
+﻿<%@ Page Title="Login" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="TP_Integrador_Master._Default" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <div class="row justify-content-center">
@@ -38,7 +38,7 @@
             <table class="table table-sm table-responsive">
                 <tr>
                     <td>
-                        <asp:Label ID="Label4" runat="server"></asp:Label>
+                        <asp:Label ID="Label4" class="alert-danger" runat="server"></asp:Label>
                     </td>
                 </tr>
             </table>

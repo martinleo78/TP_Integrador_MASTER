@@ -12,6 +12,7 @@ namespace TP_Integrador_Master
     public partial class _Default : Page
     {
         SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["miconexion"].ToString());
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -28,12 +29,14 @@ namespace TP_Integrador_Master
                 SqlDataReader sdr = cmd.ExecuteReader();
                 if (sdr.Read())
                 {
-                    Response.Redirect("Contact.aspx");
+                    Label4.Text = "Loggeado " + uid + "!";
+                    Session["usuariologgeado"] = uid;
+                    Response.Redirect("Principal.aspx");
+
                 }
                 else
                 {
                     Label4.Text = "Usuario o password incorrecto!";
-
                 }
                 con.Close();
             }

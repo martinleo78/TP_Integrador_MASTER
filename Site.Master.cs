@@ -11,7 +11,12 @@ namespace TP_Integrador_Master
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+        }
+        protected void logout_Click(object sender, EventArgs e)
+        {
+            Session.Remove("usuariologgeado");
+            boton_logout.Attributes["CssClass"] = "hidden";
+            Response.Redirect("Default.aspx",true);
         }
     }
 }

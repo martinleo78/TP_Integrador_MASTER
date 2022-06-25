@@ -11,25 +11,25 @@ namespace TP_Integrador_Master
 {
 
 
-    public partial class SiteMaster
+    public partial class CRUDUsuarios
     {
 
         /// <summary>
-        /// boton_logout control.
+        /// label_bienvenida control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button boton_logout;
+        protected global::System.Web.UI.WebControls.Label label_bienvenida;
 
         /// <summary>
-        /// MainContent control.
+        /// tablaUsuarios control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder MainContent;
+        protected global::System.Web.UI.WebControls.Panel tablaUsuarios;
     }
 }
