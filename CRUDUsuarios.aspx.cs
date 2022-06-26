@@ -20,7 +20,6 @@ namespace TP_Integrador_Master
             if (Session["usuariologgeado"] != null)
             {
                 string usuariologgeado = Session["usuariologgeado"].ToString();
-                label_bienvenida.Text = "Bienvenido/a " + usuariologgeado;
             }
             else
             {

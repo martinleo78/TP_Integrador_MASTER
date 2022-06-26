@@ -24,15 +24,56 @@ namespace TP_Integrador_Master
                 string uid = TextBox1.Text;
                 string pass = TextBox2.Text;
                 con.Open();
-                string qry = "select * from Users where UserName='" + uid + "' and Salt='" + pass + "' "+
-                    "and is_deleted=0;";
+                string qry = "SELECT  U.UserName, P.Description, U.is_deleted, left(newid(),50) as token, " +
+                "dateadd(MINUTE,10,getdate()) as vencimiento, rt.expires as vencimiento_anterior " +
+                "FROM Users U LEFT JOIN UserPrivileges ON U.Id = UserPrivileges.UserID " +
+                "INNER JOIN Privileges P ON UserPrivileges.PrivilegeID = P.Id " +
+                "left join RefreshToken rt on U.id = rt.UserId "+
+                "where U.UserName = '" + uid + "' " +
+                "and salt = '" + pass + "';";
+
                 SqlCommand cmd = new SqlCommand(qry, con);
                 SqlDataReader sdr = cmd.ExecuteReader();
                 if (sdr.Read())
                 {
-                    Label4.Text = "Loggeado " + uid + "!";
-                    Session["usuariologgeado"] = uid;
-                    Response.Redirect("Principal.aspx");
+                    if (sdr[2].ToString() == "True")
+                    {
+                        Label4.Text = "El usuario no está activo!";
+                    }
+                    else
+                    {
+                        ////////////////Levanto la sesión y cierro datareader.
+                        string[] usuariolog = new string[] { sdr[0].ToString(), sdr[1].ToString(), sdr[3].ToString(), sdr[4].ToString(), sdr[5].ToString() };
+                        Session["usuariologgeado"] = usuariolog;
+                        sdr.Close();
+                        sdr = null;
+
+                        ////////////////Guardo Token
+                        ///Si no existe, creo
+                        if (string.IsNullOrEmpty(usuariolog[4]))
+                        {
+                            qry = "insert into refreshtoken(Id, UserId, Token, Expires) " +
+                                    "select newid(), id, '" + usuariolog[2] + "', '" + usuariolog[3] + "' " +
+                                    "from users us " +
+                                    "where us.UserName ='" + usuariolog[0] + "';";
+                            cmd = new SqlCommand(qry, con);
+                            cmd.ExecuteNonQuery();
+                        }
+                        else
+                        {
+                            ///Si existe, actualizo
+                            qry = "update RT " +
+                                "set token='" + usuariolog[2] + "', " +
+                                "expires='" + usuariolog[3] + "' " +
+                                "from RefreshToken rt " +
+                                "inner join users us on rt.UserId = us.Id " +
+                                "where us.UserName ='" + usuariolog[0] + "';";
+                            cmd = new SqlCommand(qry, con);
+                            cmd.ExecuteNonQuery();
+                        }
+                        ////////////////Voy a Principal
+                        Response.Redirect("Principal.aspx");
+                    }
                 }
                 else
                 {

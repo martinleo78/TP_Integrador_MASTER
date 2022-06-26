@@ -15,15 +15,6 @@ namespace TP_Integrador_Master
     {
 
         /// <summary>
-        /// label_bienvenida control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label label_bienvenida;
-
-        /// <summary>
         /// txt_buscar_usuario control.
         /// </summary>
         /// <remarks>
