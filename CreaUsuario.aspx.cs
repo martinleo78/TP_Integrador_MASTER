@@ -73,6 +73,9 @@ namespace TP_Integrador_Master
                     txt_permiso.Text = dt.Rows[0][1].ToString();
                     label_error_edit.Text = "";
                     label_error_borrar.Text = "";
+                    label_nuevo_usuario.Text = "";
+                    lstpermisosactualizar.ClearSelection();
+                    lstpermisosactualizar.Items.FindByText(dt.Rows[0][1].ToString()).Selected = true;
                 }
                 con.Close();
             }
@@ -83,18 +86,26 @@ namespace TP_Integrador_Master
             }
         }
 
-        protected void crear_Click(object sender, EventArgs e)
+        protected void nuevo_Click(object sender, EventArgs e)
         {
+     
             ///////////////////////////Validación valores
             bool error = false;
+
             if (string.IsNullOrEmpty(txt_alta_usuario.Text))
             {
                 label_error_nombre.Text = "Error! Nombre de usuario no valido";
+                label_nuevo_usuario.Text = "Error";
+                label_error_edit.Text = "";
+                label_error_borrar.Text = "";
                 error = true;
             }
             if (txt_alta_password.Text != txt_alta_password_confirm.Text || string.IsNullOrEmpty(txt_alta_password.Text))
             {
                 label_error_pass.Text = "Error! Verifique que las contraseña sean correctas";
+                label_nuevo_usuario.Text = "Error";
+                label_error_edit.Text = "";
+                label_error_borrar.Text = "";
                 error = true;
             }
             if (!error)
@@ -129,13 +140,21 @@ namespace TP_Integrador_Master
 
                         label_error_nombre.Text = "";
                         label_error_pass.Text = "";
+                        label_nuevo_usuario.Text = "Usuario creado";
+                        label_error_edit.Text = "";
+                        label_error_borrar.Text = "";
                         txt_alta_password.Text = "";
                         txt_alta_password_confirm.Text = "";
                         txt_alta_usuario.Text = "";
+
+
                     }
                     else
                     {
                         label_error_nombre.Text = "Usuario ya existe";
+                        label_nuevo_usuario.Text = "Error";
+                        label_error_edit.Text = "";
+                        label_error_borrar.Text = "";
                     }
                 }
                 catch (Exception ex)
@@ -145,7 +164,6 @@ namespace TP_Integrador_Master
                 }
             }
         }
-
         protected void editar_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(text_usuario.Text))
@@ -169,12 +187,16 @@ namespace TP_Integrador_Master
                     if (result == 1)
                     {
                         label_error_edit.Text = "Usuario " + text_usuario.Text + " modificado";
+                        label_error_borrar.Text = "";
+                        label_nuevo_usuario.Text = "";
                         text_usuario.Text = "";
                         txt_permiso.Text = "";
                     }
                     else
                     {
                         label_error_edit.Text = "Error al borrar";
+                        label_error_borrar.Text = "";
+                        label_nuevo_usuario.Text = "";
                     }
                     con.Close();
                 }
@@ -191,6 +213,8 @@ namespace TP_Integrador_Master
             if (string.IsNullOrEmpty(text_usuario.Text))
             {
                 label_error_borrar.Text = "Seleccione un usuario";
+                label_nuevo_usuario.Text = "";
+                label_error_edit.Text = "";
             }
             else
             {
@@ -207,12 +231,16 @@ namespace TP_Integrador_Master
                     if (result == 1)
                     {
                         label_error_borrar.Text = "Usuario " + text_usuario.Text + " borrado";
+                        label_error_edit.Text = "";
+                        label_nuevo_usuario.Text = "";
                         text_usuario.Text = "";
                         txt_permiso.Text = "";
                     }
                     else
                     {
                         label_error_borrar.Text = "Error al borrar";
+                        label_error_edit.Text = "";
+                        label_nuevo_usuario.Text = "";
                     }
                     con.Close();
                 }

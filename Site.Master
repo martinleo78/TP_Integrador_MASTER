@@ -48,18 +48,25 @@
                         <% if (Session["usuariologgeado"] != null)
                             { %>
                         <ul class="navbar-nav">
-
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">CRUD Usuarios
-                                </a>
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">CRUD Usuarios</a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <% if (Session["ventanas"].ToString().Contains("Listar Usuarios"))
+                                        { %>
                                     <li><a class="dropdown-item" href="/CRUDUsuarios">Listar Usuarios</a></li>
-                                    <li><a class="dropdown-item" href="/CreaUsuario">Crea Usuarios</a></li>
+                                    <% } %>
+                                    <% if (Session["ventanas"].ToString().Contains("Mantenimiento Usuarios"))
+                                        { %>
+                                    <li><a class="dropdown-item" href="/CreaUsuario">Mantenimiento Usuarios</a></li>
+                                    <% } %>
                                 </ul>
                             </li>
+                            <% if (Session["ventanas"].ToString().Contains("CRUD Privilegios"))
+                                { %>
                             <li class="nav-item">
                                 <a class="nav-link" href="/CRUDPrivilegios">CRUDPrivilegios</a>
                             </li>
+                            <% } %>
                             <li class="nav-item">
                                 <asp:Button ID="boton_logout" Text="Logout" class="btn btn-dark btn-outline-light" runat="server" OnClick="logout_Click" />
                             </li>

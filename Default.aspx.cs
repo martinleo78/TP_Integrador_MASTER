@@ -24,14 +24,19 @@ namespace TP_Integrador_Master
                 string uid = TextBox1.Text;
                 string pass = TextBox2.Text;
                 con.Open();
-                string qry = "SELECT  U.UserName, P.Description, U.is_deleted, left(newid(),50) as token, " +
-                "dateadd(MINUTE,10,getdate()) as vencimiento, rt.expires as vencimiento_anterior " +
-                "FROM Users U LEFT JOIN UserPrivileges ON U.Id = UserPrivileges.UserID " +
-                "INNER JOIN Privileges P ON UserPrivileges.PrivilegeID = P.Id " +
-                "left join RefreshToken rt on U.id = rt.UserId "+
-                "where U.UserName = '" + uid + "' " +
-                "and salt = '" + pass + "';";
-
+                string qry =
+                    "SELECT  U.UserName, P.Description, U.is_deleted, left(newid(),50) as token, "+
+                    "dateadd(MINUTE,10,getdate()) as vencimiento, rt.expires as vencimiento_anterior, "+
+                    "STRING_AGG(Wi.Description + ', ', '') as ventanas "+
+                    "FROM Users U "+
+                    "LEFT JOIN UserPrivileges UP ON U.Id = UP.UserID "+
+                    "left JOIN Privileges P ON UP.PrivilegeID = P.Id "+
+                    "left join RefreshToken rt on U.id = rt.UserId "+
+                    "left join PrivilegeWindow pw on p.Id = pw.PrivilegeID "+
+                    "left join Windows wi on pw.WindowID = wi.Id "+
+                    "where U.UserName = '" + uid + "' " +
+                    "and salt = '" + pass + "'" +
+                    "group by U.UserName, P.Description, U.is_deleted, rt.expires;";
                 SqlCommand cmd = new SqlCommand(qry, con);
                 SqlDataReader sdr = cmd.ExecuteReader();
                 if (sdr.Read())
@@ -43,19 +48,25 @@ namespace TP_Integrador_Master
                     else
                     {
                         ////////////////Levanto la sesión y cierro datareader.
-                        string[] usuariolog = new string[] { sdr[0].ToString(), sdr[1].ToString(), sdr[3].ToString(), sdr[4].ToString(), sdr[5].ToString() };
-                        Session["usuariologgeado"] = usuariolog;
+                        Session["usuariologgeado"] = sdr[0].ToString();
+                        Session["privilegio"] = sdr[1].ToString();
+                        Session["borrado"] = sdr[2].ToString();
+                        Session["token"] = sdr[3].ToString();
+                        Session["vencimiento"] = sdr[4].ToString();
+                        Session["vencimiento_anterior"] = sdr[5].ToString();
+                        Session["ventanas"] = sdr[6].ToString();
+
                         sdr.Close();
                         sdr = null;
 
                         ////////////////Guardo Token
                         ///Si no existe, creo
-                        if (string.IsNullOrEmpty(usuariolog[4]))
+                        if (string.IsNullOrEmpty(Session["usuariologgeado"].ToString()))
                         {
                             qry = "insert into refreshtoken(Id, UserId, Token, Expires) " +
-                                    "select newid(), id, '" + usuariolog[2] + "', '" + usuariolog[3] + "' " +
+                                    "select newid(), id, '" + Session["token"].ToString() + "', '" + Session["vencimiento"].ToString() + "' " +
                                     "from users us " +
-                                    "where us.UserName ='" + usuariolog[0] + "';";
+                                    "where us.UserName ='" + Session["usuariologgeado"].ToString() + "';";
                             cmd = new SqlCommand(qry, con);
                             cmd.ExecuteNonQuery();
                         }
@@ -63,11 +74,11 @@ namespace TP_Integrador_Master
                         {
                             ///Si existe, actualizo
                             qry = "update RT " +
-                                "set token='" + usuariolog[2] + "', " +
-                                "expires='" + usuariolog[3] + "' " +
+                                "set token='" + Session["token"].ToString() + "', " +
+                                "expires='" + Session["vencimiento"].ToString() + "' " +
                                 "from RefreshToken rt " +
                                 "inner join users us on rt.UserId = us.Id " +
-                                "where us.UserName ='" + usuariolog[0] + "';";
+                                "where us.UserName ='" + Session["usuariologgeado"].ToString() + "';";
                             cmd = new SqlCommand(qry, con);
                             cmd.ExecuteNonQuery();
                         }

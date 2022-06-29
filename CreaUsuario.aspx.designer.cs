@@ -15,6 +15,42 @@ namespace TP_Integrador_Master
     {
 
         /// <summary>
+        /// txt_buscar_usuario control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txt_buscar_usuario;
+
+        /// <summary>
+        /// text_usuario control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox text_usuario;
+
+        /// <summary>
+        /// txt_permiso control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txt_permiso;
+
+        /// <summary>
+        /// label_nuevo_usuario control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label label_nuevo_usuario;
+
+        /// <summary>
         /// txt_alta_usuario control.
         /// </summary>
         /// <remarks>
@@ -69,42 +105,6 @@ namespace TP_Integrador_Master
         protected global::System.Web.UI.WebControls.DropDownList lstpermisoscrear;
 
         /// <summary>
-        /// txt_buscar_usuario control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_buscar_usuario;
-
-        /// <summary>
-        /// text_usuario control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox text_usuario;
-
-        /// <summary>
-        /// txt_permiso control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_permiso;
-
-        /// <summary>
-        /// label_error_borrar control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label label_error_borrar;
-
-        /// <summary>
         /// lstpermisosactualizar control.
         /// </summary>
         /// <remarks>
@@ -121,5 +121,14 @@ namespace TP_Integrador_Master
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label label_error_edit;
+
+        /// <summary>
+        /// label_error_borrar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label label_error_borrar;
     }
 }

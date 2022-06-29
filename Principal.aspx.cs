@@ -13,8 +13,7 @@ namespace TP_Integrador_Master
         {
             if (Session["usuariologgeado"] != null)
             {
-                string[] usuariolog = (string[])Session["usuariologgeado"];
-                label_bienvenida.Text = "Bienvenido/a " + usuariolog[0] +" (" + usuariolog[1]+") - Valido hasta:" + usuariolog[3];
+                label_bienvenida.Text = "Bienvenido/a " + Session["usuariologgeado"].ToString() + " (" + Session["privilegio"].ToString() + ") - Valido hasta:" + Session["vencimiento"].ToString(); 
             }
             else
             {
