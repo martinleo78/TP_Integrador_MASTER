@@ -14,7 +14,7 @@
                         <asp:Label ID="Label2" runat="server" Text="UserId:"></asp:Label>
                     </td>
                     <td>
-                        <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+                        <asp:TextBox class="form-control" ID="TextBox1" runat="server"></asp:TextBox>
                     </td>
                     <td></td>
                 </tr>
@@ -23,14 +23,16 @@
                         <asp:Label ID="Label3" runat="server" Text="Password :"></asp:Label>
                     </td>
                     <td>
-                        <asp:TextBox ID="TextBox2" runat="server" TextMode="Password"></asp:TextBox>
+                        <asp:TextBox class="form-control" ID="TextBox2" runat="server" TextMode="Password"></asp:TextBox>
                     </td>
                     <td></td>
                 </tr>
                 <tr>
                     <td></td>
                     <td style="text-align: center">
-                        <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Log In" />
+                        <div class="col-auto">
+                            <asp:Button class="form-control" ID="Button1" runat="server" OnClick="Button1_Click" Text="Log In" />
+                        </div>
                     </td>
                     <td></td>
                 </tr>

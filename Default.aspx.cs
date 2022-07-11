@@ -35,7 +35,10 @@ namespace TP_Integrador_Master
                     "left join PrivilegeWindow pw on p.Id = pw.PrivilegeID "+
                     "left join Windows wi on pw.WindowID = wi.Id "+
                     "where U.UserName = '" + uid + "' " +
-                    "and salt = '" + pass + "'" +
+                    "and salt = '" + pass + "' " +
+                    "and p.is_deleted = 0 " +
+                    "and pw.is_deleted = 0 " +
+                    "and wi.is_deleted = 0 " +
                     "group by U.UserName, P.Description, U.is_deleted, rt.expires;";
                 SqlCommand cmd = new SqlCommand(qry, con);
                 SqlDataReader sdr = cmd.ExecuteReader();
@@ -61,7 +64,7 @@ namespace TP_Integrador_Master
 
                         ////////////////Guardo Token
                         ///Si no existe, creo
-                        if (string.IsNullOrEmpty(Session["usuariologgeado"].ToString()))
+                        if (string.IsNullOrEmpty(Session["vencimiento_anterior"].ToString()))
                         {
                             qry = "insert into refreshtoken(Id, UserId, Token, Expires) " +
                                     "select newid(), id, '" + Session["token"].ToString() + "', '" + Session["vencimiento"].ToString() + "' " +

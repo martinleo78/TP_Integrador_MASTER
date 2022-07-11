@@ -53,11 +53,11 @@
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                     <% if (Session["ventanas"].ToString().Contains("Listar Usuarios"))
                                         { %>
-                                    <li><a class="dropdown-item" href="/CRUDUsuarios">Listar Usuarios</a></li>
+                                    <li><a class="dropdown-item" href="/ListarUsuarios">Listar Usuarios</a></li>
                                     <% } %>
                                     <% if (Session["ventanas"].ToString().Contains("Mantenimiento Usuarios"))
                                         { %>
-                                    <li><a class="dropdown-item" href="/CreaUsuario">Mantenimiento Usuarios</a></li>
+                                    <li><a class="dropdown-item" href="/MantenimientoUsuarios">Mantenimiento Usuarios</a></li>
                                     <% } %>
                                 </ul>
                             </li>
@@ -81,10 +81,9 @@
             </asp:ContentPlaceHolder>
             <hr />
             <footer>
-                <p>&copy; <%: DateTime.Now.Year %> - Cimino, Diaz, Spero, Ferreyra</p>
+                <p>&copy; <%: DateTime.Now.Year %> - Cimino, Diaz, Spero</p>
             </footer>
         </div>
-
     </form>
 </body>
 </html>

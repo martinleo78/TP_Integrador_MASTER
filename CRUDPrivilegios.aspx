@@ -1,51 +1,78 @@
 ﻿<%@ Page Title="CRUD Privilegios" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="CRUDPrivilegios.aspx.cs" Inherits="TP_Integrador_Master.CRUDPrivilegios" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="mt-4">
-        <h4>Busqueda de Privilegios</h4>
 
-    </div>
 
-    <label>Nombre de Privilegio</label>
-    <asp:TextBox id="txtb_buscarPrivilegio" runat="server" />
-    <asp:Button Text="Buscar" class="btn btn-primary" runat="server" OnClick="buscarPrivilegio_click" />
+    <div class="container">
+        <div>
+            <asp:Button Text="Mantenimiento" ID="buttonEdit" Class="btn btn-outline-dark m-2 w-auto" runat="server" OnClick="buttonEdit_Click" />
+            <asp:Button Text="Nuevo" ID="buttonNew" Class="btn btn-outline-dark m-2 w-auto" runat="server" OnClick="buttonNew_Click" />
+        </div>
 
-    <asp:TextBox Text="Nuevo Privilegio" type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#myModal" runat="server" />
-    <!-- The Modal -->
-    <div class="modal fade" id="myModal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-
-                <!-- Modal Header -->
-                <div class="modal-header">
-                    <h4 class="modal-title">Nuevo Privilegio</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        <div class="row ">
+            <div id="crearPrivilegio" class="col mt-1" runat="server">
+                <h2>Crear Privilegio</h2>
+                <div class="mb-3 row row-cols-3">
+                    <label class="col-2 form-label">Nombre del Privilegio</label>
+                    <asp:TextBox ID="txt_alta_Privilegio" Class="col form-control w-25" runat="server" />
+                    <asp:Label ID="label_error_nuevo" class="text-danger" runat="server"></asp:Label>
+                </div>
+                <div class="mb-3  row row-cols-3">
+                    <label class="col-2 form-label">Listar Usuarios</label>
+                    <asp:CheckBox ID="listar_checkbox" runat="server" />
+                </div>
+                <div class="mb-3  row row-cols-3">
+                    <label class="col-2 form-label">Mantenimiento Usuarios</label>
+                    <asp:CheckBox ID="mantenimiento_checkbox" runat="server" />
+                </div>
+                <div class="mb-3  row row-cols-3">
+                    <label class="col-2 form-label">CRUD Privilegios</label>
+                    <asp:CheckBox ID="privilegios_checkbox" runat="server" />
+                </div>
+                <asp:Button Text="Crear" Class="btn btn-outline-dark m-2 w-auto" runat="server" OnClick="nuevo_Click" />
+            </div>
+            <div id="mantenimientoPrivilegio" class="col mt-1" runat="server">
+                <h2>Mantenimiento de Privilegios</h2>
+                <div class="mb-3 row row-cols-3">
+                    <label class="col-2 col-form-label">Buscar Privilegio</label>
+                    <asp:TextBox ID="txt_buscar_Privilegio" Class="form-control w-25" runat="server" />
+                    <asp:Button Text="Buscar" Class="btn btn-outline-dark ms-1 w-auto" runat="server" OnClick="buscar_click" />
+                </div>
+                <div class="mt-3">
+                    <h3>Privilegio seleccionado</h3>
+                    <div class="mb-3 row row-cols-3">
+                        <label class="col-2 col-form-label">Privilegio</label>
+                        <asp:TextBox ID="txt_mantiene_Privilegio" Class="form-control-plaintext w-25" ReadOnly="true" runat="server" />
+                        <asp:Label ID="label_error_mantenimiento" Text="" class="text-danger" runat="server" />
+                    </div>
+                    <div class="mb-3  row row-cols-3">
+                        <label class="col-2 form-label">Listar Usuarios</label>
+                        <asp:CheckBox ID="listar_M_checkbox" runat="server" />
+                    </div>
+                    <div class="mb-3  row row-cols-3">
+                        <label class="col-2 form-label">Mantenimiento Usuarios</label>
+                        <asp:CheckBox ID="mantenimiento_M_checkbox" runat="server" />
+                    </div>
+                    <div class="mb-3  row row-cols-3">
+                        <label class="col-2 form-label">CRUD Privilegios</label>
+                        <asp:CheckBox ID="privilegios_M_checkbox" runat="server" />
+                    </div>
+                    <div class="mb-3 row row-cols-3">
+                        <label class="col-2 col-form-label">Cantidad Usuarios</label>
+                        <asp:TextBox ID="txt_usuarios_Privilegio" Class="form-control-plaintext w-25" ReadOnly="true" runat="server" />
+                        <asp:Label ID="label_mantiene_privilegio" Text="" class="text-danger" runat="server" />
+                    </div>
                 </div>
 
-                <!-- Modal body -->
-                <div class="modal-body">
-                    <label>Nombre de Privilegio</label>
-                    <asp:TextBox id="txtb_nuevoPrivilegio" runat="server" />
-                    <asp:Button Text="Guardar" class="btn btn-success" runat="server" OnClick="crearPrivilegio_click" />
-
+                <div class="mb-3 row row-cols-3">
+                    <div class="col-2">
+                        <asp:Button Text="Editar" Class="btn btn-outline-dark m-2 w-auto" runat="server" OnClick="editar_Click" />
+                    </div>
+                    <div class="col-2">
+                        <asp:Button Text="Borrar" Class="btn btn-outline-dark m-2 w-auto" runat="server" OnClick="borrar_Click" />
+                    </div>
                 </div>
-
-                <!-- Modal footer -->
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
-                </div>
-
             </div>
         </div>
-    </div>
-
-
-    <div class="mt-6">
-        <asp:label class="badge bg-success" id="label_resultado" runat="server" Text=""></asp:label>
-    </div>
-
-    <div class="mt-6">
-        <asp:Panel ID="tablaPrivilegios" runat="server">
-        </asp:Panel>
     </div>
 </asp:Content>
